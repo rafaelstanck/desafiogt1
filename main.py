@@ -10,6 +10,7 @@ c) faça o versionamento no github ou gitlab.
 import psycopg2
 
 
+# função para conectar com Banco de Dados PostgreSQL
 def conecta_db():
     con = psycopg2.connect(host='localhost',
                            database='desafiogt1',
@@ -18,6 +19,7 @@ def conecta_db():
     return con
 
 
+# Função para criar tabela no PostgreSQL
 def criar_tabela(tabela):
     sql = f'CREATE TABLE {tabela}(' \
           f'id serial NOT NULL, ' \
@@ -33,6 +35,7 @@ def criar_tabela(tabela):
     con.close()
 
 
+# Função para inserir dados em uma tabela PostgreSQL
 def insere_dados(tabela, text, num, op, dat):
     sql = f"INSERT INTO {tabela} (texto, numero, opcao, data) VALUES " \
           f"('{text}', '{num}', '{op}', '{dat}');"
@@ -43,6 +46,7 @@ def insere_dados(tabela, text, num, op, dat):
     con.close()
 
 
+# Função para executar comando SQL no PostgreSQL
 def executar_comando(sql):
     con = conecta_db()
     cur = con.cursor()
@@ -51,6 +55,7 @@ def executar_comando(sql):
     con.close()
 
 
+# Função para apagar tabela no PostgreSQL
 def apaga_tabela(tabela):
     con = conecta_db()
     cur = con.cursor()
@@ -59,13 +64,16 @@ def apaga_tabela(tabela):
     con.close()
 
 
+# nome da tabela a ser manipulada
 nomedatabela = 'desafiogt1'
 
+# dados a serem inseridos no Banco de Dados
 texto = 'São José-SC'
 numero = '111444777'
 opcao = '1'
 data = '2021-09-11'
 
+# comandos usando funções para manipular PostgreSQL, basta retirar o '#' do início da linha
 # criar_tabela(nomedatabela)
 # insere_dados(nomedatabela, texto, numero, opcao, data)
 # apaga_tabela(nomedatabela)
